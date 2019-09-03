@@ -12,4 +12,4 @@ def do():
             for x in list(range(0,20)):
                 check = '[{0}]'.format(str(x))
                 content = content.replace(check, '')
-            return str(content).encode()
+            return str(content).encode(), r.url
