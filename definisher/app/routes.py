@@ -1,11 +1,12 @@
+import os
 from app import app
 from app import script
-from flask import render_template
+from flask import render_template, send_from_directory
 
 @app.route('/')
-def aaa():
-    return render_template('state1.html')
-@app.route('/index')
+@app.route('/result')
 def index():
-    content = script.do().decode().split("SplittingSentense")
-    return render_template('base.html', title=content[0], content = content[1])
+    response = script.do()
+    content = response[0].decode().split("SplittingSentense")
+    url = response[1]
+    return render_template('index.html', title=content[0], content = content[1], url = url)
