@@ -1,26 +1,34 @@
-import requests
+import json, requests
 from bs4 import BeautifulSoup
 
+def getContent(title):
+    JSONData =  requests.get("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles="+title+"&exintro=1&explaintext=1")
+    JSONData = json.loads(JSONData.text)
+    JSONData =  list(JSONData["query"]["pages"].values())[0]
+    clearData = JSONData["extract"]
+    return clearData
+
+
 def do(category):
-    while True:
-        if category:
-            r = requests.get("https://en.wikipedia.org/wiki/Special:RandomInCategory/" + str(category))
-            rightUrl = r.url.replace("Category:", '')
-            rightUrl = rightUrl.replace("Talk:", '')
-            if r.url!=rightUrl:
-                r = requests.get(rightUrl)
+    rand = requests.get("https://en.wikipedia.org/wiki/Special:RandomInCategory/" + str(category))
+    rightUrl = rand.url.replace("Category:", '')
+    rightUrl = rightUrl.replace("Talk:", '')
+    rand = requests.get(rightUrl)
+    soup = BeautifulSoup(rand.text, "html.parser")
+    title = soup.h1.text
 
-        else:
-            r = requests.get("https://en.wikipedia.org/wiki/Special:Random")
+    try:
+        content = getContent(title.replace(" ", "_"))
+        print("done")
 
-        soup = BeautifulSoup(r.text, "html.parser")
-        print(soup.p.text)
+    except KeyError:
+        print(title)
+        print("keyError")
+        return do(category)
 
-        if soup.p.text.strip() and soup.p.text.strip()!="Other reasons this message may be displayed:":
-            content = soup.h1.text + "SplittingSentense" + soup.p.text
+    if title==content or content==0:
+        return do(category)
 
-            for x in list(range(0,20)):
-                check = '[{0}]'.format(str(x))
-                content = content.replace(check, "")
-
-            return str(content).encode(), r.url
+    else:
+        print("fine")
+        return title, content, rand.url
