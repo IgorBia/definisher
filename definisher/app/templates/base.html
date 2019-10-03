@@ -9,9 +9,11 @@
     <body>
     {% block container %}{% endblock %}
     <h1>{{ title }}</h1>
-    <p>{{ content }}</p>
-    <p>source: 
-        <a href= "{{ url }}">Wikipedia</a>
-    </p>
+    <div class="content">
+        {{ content }}
+        <p>source:
+            <a href= "{{ url }}">Wikipedia</a>
+        </p>
+    </div>
     </body>
 </html>
