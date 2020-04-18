@@ -9,8 +9,14 @@ def getContent(title):
     return clearData
 
 
-def do(category):
-    rand = requests.get("https://en.wikipedia.org/wiki/Special:RandomInCategory/" + str(category))
+def do(category=None):
+
+    if category:
+        rand = requests.get("https://en.wikipedia.org/wiki/Special:RandomInCategory/" + str(category))
+
+    else:
+        rand = requests.get("https://en.wikipedia.org/wiki/Special:Random")
+
     rightUrl = rand.url.replace("Category:", '')
     rightUrl = rightUrl.replace("Talk:", '')
     rand = requests.get(rightUrl)
@@ -22,13 +28,15 @@ def do(category):
         print("done")
 
     except KeyError:
-        print(title)
+        print(category)
         print("keyError")
         return do(category)
 
     if title==content or content==0:
+        print(title)
         return do(category)
 
     else:
         print("fine")
         return title, content, rand.url
+        
