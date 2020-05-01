@@ -5,53 +5,29 @@
 <style>
     #container {
         width: 1000px;
-        height: 400px;
-        left: 460px;
-	    right: 460px;
+        margin-left: auto;
+	    margin-right: auto;
     }
 
-	#text1 {
-        width: 1000px;
-        height: 300px;
-        left: 5px;
+	.text {
+        width: 990px;
+        height: 500px;
+        margin-left: 5px;
+        margin-right:5px;
+        position: absolute;
     }
 
-    #text2 {
-        top:10px;
-        width: 500px;
-        height: 50px;
-        left: 500px;
-    }
 
     body {
-        background: #A7A9AC;
-        background-image: -webkit-gradient(
-            linear,
-            left top,
-            right top,
-            color-stop(.34, rgba(230,237,241,.05)),
-            color-stop(.67, rgba(230,237,241,0)));
-        -webkit-background-size: 5px 5px;
-        background-image:
-            -webkit-gradient(
-                radial,
-                50% -50,
-                300,
-                50% 0,
-                0,
-                from(rgba(230, 237, 241, 0)),
-                to(rgba(230, 237, 241, 0.8)));
-      height:100%;
-      margin: auto;
-      width: 1000px;
+          background: #A7A9AC;
+          height:100%;
+          margin: auto;
+          width: 1000px;
     }
     .button {
         position: relative;
-        top: 100px;
         display: inline-block;
-        top: 50%;
-        left: 50%;
-        margin-top: 100px;
+        left: 395px;
         -webkit-border-radius: 10px;
         -webkit-box-shadow:
             0px 3px rgba(128,128,128,1), /* gradient effects */
@@ -151,21 +127,24 @@
             font-size: 26px;
         }
         .rev-block {
-     position: relative;
+        position: relative;
     }
 
         h1 {
          font-family: Poppins;
-         position: absolute;
+         width: 990px;
          font-weight: bold;
          color: #fff;
          font-size: 20px;
          text-transform: uppercase;
          padding: 0.4em 1em;
          margin-top: 20px;
-         top: 40%;
-         left: 46%;
-         transform: translate(-50%, -50%);
+    }
+
+    h2 {
+        margin-left: 20px;
+	    margin-right: auto;
+	    position: relative;
     }
 
     .rev-block span {
@@ -215,8 +194,8 @@
     }
 
     #onemore {
-         top: 51%;
-         left: 58%;
+         left: 300px;
+         width: auto;
     }
 
     #onemore span {
@@ -233,23 +212,22 @@
 {% endblock %}
 
 {% block container %}
-    <div id="container">
         <h2>{{ title }}</h2>
-        <div id="text1">
-            <h1 class="rev-block">
-                <span>{{ content }}</span>
-            </h1>
-        </div>
-        <div id="text2">
-            <h1 class="rev-block" id="onemore">
-                <span>source: <a href= "{{ url }}">Wikipedia</a> </span>
-            </h1>
-        </div>
-        <div>
+
+                <h1 class="rev-block">
+                    <span>{{ content }}</span>
+                </h1>
+
+
+
             <a href="http://127.0.0.1:5000/result/Mathematics" class="button">
                 <span>Jebać Disa</span>
             </a>
-        </div>
-    </div>
+
+
+                <h1 class="rev-block" id="onemore">
+                        <span>source: <a href= "{{ url }}">Wikipedia</a> </span>
+                </h1>
+
 
 {% endblock %}
